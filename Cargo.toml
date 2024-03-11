@@ -1,5 +1,5 @@
 [package]
-name = "dot-dash"
+name = "dot_dash"
 version = "0.1.0"
 authors = ["Allister Isaiah Harvey <a.i.harvey@icloud.com>"]
 edition = "2021"

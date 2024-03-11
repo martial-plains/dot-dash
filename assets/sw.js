@@ -2,8 +2,8 @@ var cacheName = 'dot-dash-pwa';
 var filesToCache = [
   './',
   './index.html',
-  './dot-dash.js',
-  './dot-dash_bg.wasm',
+  './dot_dash.js',
+  './dot_dash_bg.wasm',
 ];
 
 /* Start the service worker and cache all of the app's content */
