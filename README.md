@@ -1,4 +1,14 @@
-# Dot Dash: Morse Code Translator
+<h1 align="center">
+  <img src="docs/icon-256.png" alt="Dot Dash Icon" width="192" height="192"/>
+  <br>
+  Dot Dash
+</h1>
+
+<p align="center"><strong>Morse Code Translator</strong></p>
+
+<p align="center">
+  <img src="/docs/screenshots/dot dash light.png" alt="Preview"/>
+</p>
 
 Dot Dash is a powerful and user-friendly application that translates Morse code.
 It’s built with Rust, a language renowned for its performance and safety. The
