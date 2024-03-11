@@ -7,9 +7,7 @@ pub struct App {
     morse_code: String,
 }
 
-
 impl App {
-    
     /// Called once before the first frame.
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         // This is also where you can customize the look and feel of egui using
@@ -25,31 +23,27 @@ impl App {
     }
 
     fn message_ui(&mut self, ui: &mut egui::Ui) -> egui::Response {
-        let Self {
-            message, ..
-        } = self;
+        let Self { message, .. } = self;
 
         let _heading_response = {
             let text = egui::RichText::new("Message").heading();
             ui.add(egui::Label::new(text))
         };
 
-        let text_edit_response = 
+        let text_edit_response =
             ui.add(egui::TextEdit::multiline(message).min_size(ui.available_size()));
 
         text_edit_response
     }
 
     fn morse_code_ui(&mut self, ui: &mut egui::Ui) -> egui::Response {
-        let Self {
-            morse_code, ..
-        } = self;
+        let Self { morse_code, .. } = self;
 
         let _heading_response = {
             let text = egui::RichText::new("Morse Code").heading();
             ui.add(egui::Label::new(text))
         };
-        let text_edit_response = 
+        let text_edit_response =
             ui.add(egui::TextEdit::multiline(morse_code).min_size(ui.available_size()));
 
         text_edit_response
@@ -87,19 +81,24 @@ impl eframe::App for App {
 
         egui::CentralPanel::default().show(ctx, |ui| {
             ui.columns(2, |columns| {
-                ScrollArea::vertical().id_source("message").show(&mut columns[0], |ui| {
-                    if self.message_ui(ui).changed() {
-                        self.morse_code = algorithms::ciphers::morse_code::encrypt(&self.message);
-                    }
-                });
+                ScrollArea::vertical()
+                    .id_source("message")
+                    .show(&mut columns[0], |ui| {
+                        if self.message_ui(ui).changed() {
+                            self.morse_code =
+                                algorithms::ciphers::morse_code::encrypt(&self.message);
+                        }
+                    });
 
-                ScrollArea::vertical().id_source("morse_code").show(&mut columns[1], |ui| {
-                    if self.morse_code_ui(ui).changed() {
-                        self.message = algorithms::ciphers::morse_code::decrypt(&self.morse_code);
-                    };
-                });
+                ScrollArea::vertical()
+                    .id_source("morse_code")
+                    .show(&mut columns[1], |ui| {
+                        if self.morse_code_ui(ui).changed() {
+                            self.message =
+                                algorithms::ciphers::morse_code::decrypt(&self.morse_code);
+                        };
+                    });
             });
-
         });
     }
 }
