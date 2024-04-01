@@ -1,3 +1,4 @@
+use eframe::egui;
 use egui::ScrollArea;
 
 #[derive(Debug, Default, serde::Deserialize, serde::Serialize)]
