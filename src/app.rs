@@ -1,6 +1,5 @@
 use eframe::egui::{self, Context};
 use serde::{Deserialize, Serialize};
-use web_sys::{AudioContext, OscillatorNode};
 
 use crate::gui::Gui;
 
@@ -9,6 +8,7 @@ mod web;
 
 #[derive(Debug, serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
+#[cfg_attr(not(target_arch = "wasm32"), derive(Default))]
 pub struct App {
     #[cfg(target_arch = "wasm32")]
     #[serde(skip)]
@@ -21,6 +21,7 @@ pub struct App {
     gui: Gui,
 }
 
+#[cfg(target_arch = "wasm32")]
 impl Default for App {
     fn default() -> Self {
         let context = AudioContext::new().unwrap();
