@@ -1,15 +1,45 @@
-use eframe::egui;
-use egui::ScrollArea;
+use eframe::egui::{self, Context};
+use serde::{Deserialize, Serialize};
+use web_sys::{AudioContext, OscillatorNode};
 
-#[derive(Debug, Default, serde::Deserialize, serde::Serialize)]
+use crate::gui::Gui;
+
+#[cfg(target_arch = "wasm32")]
+mod web;
+
+#[derive(Debug, serde::Deserialize, serde::Serialize)]
 #[serde(default)] // if we add new fields, give them default values when deserializing old state
 pub struct App {
-    message: String,
-    morse_code: String,
+    #[cfg(target_arch = "wasm32")]
+    #[serde(skip)]
+    audio_ctx: AudioContext,
+    #[cfg(target_arch = "wasm32")]
+    #[serde(skip)]
+    o: OscillatorNode,
+
+    params: Params,
+    gui: Gui,
+}
+
+impl Default for App {
+    fn default() -> Self {
+        let context = AudioContext::new().unwrap();
+        let o = context.create_oscillator().unwrap();
+        o.set_type(web_sys::OscillatorType::Sine);
+        o.connect_with_audio_node(&context.destination()).unwrap();
+
+        Self {
+            audio_ctx: context,
+            o,
+            params: Params::default(),
+            gui: Gui::default(),
+        }
+    }
 }
 
 impl App {
     /// Called once before the first frame.
+    #[must_use]
     pub fn new(cc: &eframe::CreationContext<'_>) -> Self {
         // This is also where you can customize the look and feel of egui using
         // `cc.egui_ctx.set_visuals` and `cc.egui_ctx.set_fonts`.
@@ -20,34 +50,32 @@ impl App {
             return eframe::get_value(storage, eframe::APP_KEY).unwrap_or_default();
         }
 
-        Default::default()
+        App::default()
     }
 
-    fn message_ui(&mut self, ui: &mut egui::Ui) -> egui::Response {
-        let Self { message, .. } = self;
+    pub fn update_gui(&mut self, ctx: &Context, frame: &mut eframe::Frame) {
+        self.gui.update(ctx, frame);
 
-        let _heading_response = {
-            let text = egui::RichText::new("Message").heading();
-            ui.add(egui::Label::new(text))
-        };
-
-        let text_edit_response =
-            ui.add(egui::TextEdit::multiline(message).min_size(ui.available_size()));
-
-        text_edit_response
-    }
-
-    fn morse_code_ui(&mut self, ui: &mut egui::Ui) -> egui::Response {
-        let Self { morse_code, .. } = self;
-
-        let _heading_response = {
-            let text = egui::RichText::new("Morse Code").heading();
-            ui.add(egui::Label::new(text))
-        };
-        let text_edit_response =
-            ui.add(egui::TextEdit::multiline(morse_code).min_size(ui.available_size()));
-
-        text_edit_response
+        if let Ok(message) = self.gui.message_channel.1.try_recv() {
+            match message {
+                crate::gui::Message::SetFrequency(value) => self.params.frequency = value,
+                crate::gui::Message::SetTimeUnit(value) => self.params.time_unit = value,
+                crate::gui::Message::PlayMorse => {
+                    #[cfg(target_arch = "wasm32")]
+                    {
+                        web::play_morse(
+                            &self.params.morse_code,
+                            self.params.frequency,
+                            self.params.time_unit,
+                            &mut self.o,
+                            &self.audio_ctx,
+                        );
+                    }
+                }
+                crate::gui::Message::UpdateMessage(value) => self.params.message = value,
+                crate::gui::Message::UpdateMorseCode(value) => self.params.morse_code = value,
+            }
+        }
     }
 }
 
@@ -58,48 +86,26 @@ impl eframe::App for App {
     }
 
     /// Called each time the UI needs repainting, which may be many times per second.
-    fn update(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
-        egui::TopBottomPanel::top("top_panel").show(ctx, |ui| {
-            // The top panel is often a good place for a menu bar:
+    fn update(&mut self, ctx: &egui::Context, frame: &mut eframe::Frame) {
+        self.update_gui(ctx, frame);
+    }
+}
 
-            egui::menu::bar(ui, |ui| {
-                // NOTE: no File->Quit on web pages!
-                let is_web = cfg!(target_arch = "wasm32");
-                if !is_web {
-                    ui.menu_button("File", |ui| {
-                        if ui.button("Quit").clicked() {
-                            ctx.send_viewport_cmd(egui::ViewportCommand::Close);
-                        }
-                    });
-                    ui.add_space(16.0);
-                }
+#[derive(Debug, Serialize, Deserialize)]
+struct Params {
+    frequency: f32,
+    time_unit: u32,
+    message: String,
+    morse_code: String,
+}
 
-                ui.menu_button("View", |ui| {
-                    egui::widgets::global_dark_light_mode_buttons(ui);
-                })
-            });
-        });
-
-        egui::CentralPanel::default().show(ctx, |ui| {
-            ui.columns(2, |columns| {
-                ScrollArea::vertical()
-                    .id_source("message")
-                    .show(&mut columns[0], |ui| {
-                        if self.message_ui(ui).changed() {
-                            self.morse_code =
-                                algorithms::ciphers::morse_code::encrypt(&self.message);
-                        }
-                    });
-
-                ScrollArea::vertical()
-                    .id_source("morse_code")
-                    .show(&mut columns[1], |ui| {
-                        if self.morse_code_ui(ui).changed() {
-                            self.message =
-                                algorithms::ciphers::morse_code::decrypt(&self.morse_code);
-                        };
-                    });
-            });
-        });
+impl Default for Params {
+    fn default() -> Self {
+        Self {
+            frequency: 700.0,
+            time_unit: 60,
+            message: String::default(),
+            morse_code: String::default(),
+        }
     }
 }

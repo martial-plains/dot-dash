@@ -17,6 +17,8 @@ getrandom = { version = "0.2.12", features = ["js"] }
 
 # You only need serde if you want app persistence:
 serde = { version = "1.0.197", features = ["derive"] }
+web-sys = { version = "0.3.69", features = ["AudioContext", "AudioDestinationNode", "AudioParam", "GainNode", "OscillatorNode", "OscillatorType"] }
+gloo = { version = "0.11.0", features = ["futures", "timers"] }
 
 # native:
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
