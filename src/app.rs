@@ -1,6 +1,9 @@
 use eframe::egui::{self, Context};
 use serde::{Deserialize, Serialize};
 
+#[cfg(target_arch = "wasm32")]
+use web_sys::{AudioContext, OscillatorNode};
+
 use crate::gui::Gui;
 
 #[cfg(target_arch = "wasm32")]
