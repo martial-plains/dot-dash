@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-test-rust:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: denoland/setup-deno@v1
+      with:
+        deno-version: v1.x    
+    - name: build css
+      run: |
+        deno run build_css
+    - uses: actions/checkout@v4
+    - name: Nightly build
+      run: |
+        rustup override set nightly
+        cargo build --verbose
+    - name: Run nightly tests
+      run: |
+        rustup override set nightly
+        cargo test --verbose
