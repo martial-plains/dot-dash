@@ -1,0 +1,14 @@
+{
+    "lock": false,
+    "tasks": {
+        "build_css": "deno run -A npm:tailwindcss -i ./public/styles/main.css -o ./public/styles/tailwind/tailwind.css"
+    },
+    "imports": {
+        "tailwindcss": "npm:tailwindcss@3.3.5"
+    },
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "jsxImportSource": "preact"
+    },
+    "nodeModulesDir": true
+}

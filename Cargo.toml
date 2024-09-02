@@ -4,30 +4,45 @@ version = "0.1.0"
 authors = ["Allister Isaiah Harvey <a.i.harvey@icloud.com>"]
 edition = "2021"
 
+
 [dependencies]
-eframe = { version = "0.28.1", default-features = false, features = [
-    "accesskit",     # Make egui comptaible with screen readers. NOTE: adds a lot of dependencies.
-    "default_fonts", # Embed the default egui fonts.
-    "glow",          # Use the glow rendering backend. Alternative: "wgpu".
-    "persistence",   # Enable restoring app state when restarting the app.
-] }
-log = "0.4.21"
-algorithms = { git = "https://github.com/a-isaiahharvey/algorithms-rs.git", version = "0.1.0" }
-getrandom = { version = "0.2.12", features = ["js"] }
+derive_more = { version = "1.0.0", features = ["display"] }
+dioxus = { version = "0.5.6", features = ["router"] }
+dioxus-logger = "0.5.1"
+manganis = "0.2.2"
+morsify = { git = "https://github.com/martial-plains/morsify", branch = "main", version = "0.1.0" }
 
-# You only need serde if you want app persistence:
-serde = { version = "1.0.197", features = ["derive"] }
-web-sys = { version = "0.3.69", features = ["AudioContext", "AudioDestinationNode", "AudioParam", "GainNode", "OscillatorNode", "OscillatorType"] }
-gloo = { version = "0.11.0", features = ["futures", "timers"] }
 
-# native:
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-env_logger = "0.11.3"
+dioxus = { version = "0.5.6", features = ["desktop", "router"] }
+cpal = "0.15.3"
+rodio = "0.19.0"
 
-# web:
 [target.'cfg(target_arch = "wasm32")'.dependencies]
-wasm-bindgen-futures = "0.4.42"
+dioxus = { version = "0.5.6", features = ["web", "router"] }
+gloo = { version = "0.11.0", features = ["futures", "timers"] }
+wasm-bindgen-futures = "0.4.43"
+web-sys = { version = "0.3.69", features = [
+    "AudioContext",
+    "AudioDestinationNode",
+    "AudioParam",
+    "Clipboard",
+    "GainNode",
+    "Navigator",
+    "OscillatorNode",
+    "OscillatorType",
+    "SpeechSynthesis",
+    "SpeechSynthesisUtterance",
+    "Window",
+] }
 
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = "0.5.2"
+objc2-foundation = { version = "0.2.2" }
+objc2-app-kit = { version = "0.2.2", features = [
+    "NSPasteboard",
+    "NSSpeechSynthesizer",
+] }
 
 [profile.release]
 opt-level = 2 # fast and small wasm
@@ -38,7 +53,3 @@ opt-level = 2
 
 
 [patch.crates-io]
-
-# If you want to use the bleeding edge version of egui and eframe:
-# egui = { git = "https://github.com/emilk/egui", branch = "master" }
-# eframe = { git = "https://github.com/emilk/egui", branch = "master" }

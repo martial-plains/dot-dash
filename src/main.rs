@@ -1,48 +1,46 @@
-#![feature(async_closure)]
-#![warn(clippy::all, rust_2018_idioms)]
-#![cfg_attr(not(debug_assertions), windows_subsystem = "windows")] // hide console window on Windows in release
+use dioxus::{
+    desktop::{LogicalSize, WindowBuilder},
+    prelude::*,
+};
+use dioxus_logger::tracing::{info, Level};
+use routes::home::Home;
 
-// When compiling natively:
-#[cfg(not(target_arch = "wasm32"))]
-fn main() -> eframe::Result<()> {
-    use eframe::egui;
+pub mod platforms;
+pub mod routes;
 
-    env_logger::init(); // Log to stderr (if you run with `RUST_LOG=debug`).
+const _: &str = manganis::mg!(file("public/styles/tailwind/tailwind.css"));
 
-    let native_options = eframe::NativeOptions {
-        viewport: egui::ViewportBuilder::default()
-            .with_inner_size([400.0, 300.0])
-            .with_min_inner_size([300.0, 220.0])
-            .with_icon(
-                // NOE: Adding an icon is optional
-                eframe::icon_data::from_png_bytes(&include_bytes!("../assets/icon-256.png")[..])
-                    .unwrap(),
-            ),
-        ..Default::default()
-    };
-    eframe::run_native(
-        "Dot Dash",
-        native_options,
-        Box::new(|cc| Box::new(dot_dash::App::new(cc))),
-    )
+#[derive(Clone, Routable, Debug, PartialEq)]
+enum Route {
+    #[route("/")]
+    Home {},
 }
 
-// When compiling to web using trunk:
-#[cfg(target_arch = "wasm32")]
 fn main() {
-    // Redirect `log` message to `console.log` and friends:
-    eframe::WebLogger::init(log::LevelFilter::Debug).ok();
+    // Init logger
+    dioxus_logger::init(Level::INFO).expect("failed to init logger");
+    info!("starting app");
 
-    let web_options = eframe::WebOptions::default();
+    #[cfg(not(target_arch = "wasm32"))]
+    {
+        let cfg = dioxus::desktop::Config::new().with_window(
+            WindowBuilder::new()
+                .with_title("Dot Dash")
+                .with_always_on_top(false)
+                .with_min_inner_size(LogicalSize::new(400, 600)),
+        );
+        LaunchBuilder::desktop().with_cfg(cfg).launch(App);
+    }
 
-    wasm_bindgen_futures::spawn_local(async {
-        eframe::WebRunner::new()
-            .start(
-                "the_canvas_id", // hardcode it
-                web_options,
-                Box::new(|cc| Box::new(dot_dash::App::new(cc))),
-            )
-            .await
-            .expect("failed to start eframe");
-    });
+    #[cfg(target_arch = "wasm32")]
+    {
+        launch(App);
+    }
+}
+
+#[component]
+fn App() -> Element {
+    rsx! {
+        Router::<Route> {}
+    }
 }
