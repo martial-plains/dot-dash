@@ -5,7 +5,7 @@ use routes::home::Home;
 pub mod platforms;
 pub mod routes;
 
-const _: &str = manganis::mg!(file("public/styles/tailwind/tailwind.css"));
+const _: &str = manganis::mg!(file("./public/styles/tailwind/tailwind.css"));
 
 #[derive(Clone, Routable, Debug, PartialEq)]
 enum Route {
