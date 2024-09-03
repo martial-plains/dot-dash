@@ -41,4 +41,4 @@ jobs:
 
     # deploy for github.io
     - name: Dioxus Deploy
-      uses: martial-plains/dioxus-deploy-action
+      uses: martial-plains/dioxus-deploy-action@b8ffa4afde5973897b6519d62cfc0473133716c3
