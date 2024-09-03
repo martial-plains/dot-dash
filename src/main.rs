@@ -9,8 +9,7 @@ const STYLE: &str = asset!("./public/styles/tailwind/tailwind.css");
 
 #[derive(Clone, Routable, Debug, PartialEq)]
 enum Route {
-    #[cfg_attr(target_arch = "wasm32", route("/dot-dash/"))]
-    #[cfg_attr(not(target_arch = "wasm32"), route("/"))]
+    #[route("/")]
     Home {},
     // PageNotFound is a catch all route that will match any route and placing the matched segments in the route field
     #[route("/:..route")]
