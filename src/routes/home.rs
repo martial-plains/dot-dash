@@ -89,7 +89,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                         },
                         img {
                             class: "fill-none",
-                            src: "/dot-dash/images/play.svg",
+                            src: asset!("/public/images/play.svg"),
                             height: 20,
                             width: 20
                         }
@@ -100,7 +100,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                         id: "stop-input",
                         img {
                             class: "fill-none",
-                            src: "/dot-dash/images/stop.svg",
+                            src: asset!("/public/images/stop.svg"),
                             height: 20,
                             width: 20
                         }
@@ -126,7 +126,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                         },
                         img {
                             class: "fill-none",
-                            src: "/dot-dash/images/clipboard.svg",
+                            src: asset!("/public/images/clipboard.svg"),
                             height: 20,
                             width: 20
                         }
@@ -190,7 +190,7 @@ fn MorseFormControl(
                             },
                             img {
                                 class: "fill-none",
-                                src: "/dot-dash/images/play.svg",
+                                src: asset!("public/images/play.svg"),
                                 height: 20,
                                 width: 20
                             }
@@ -205,7 +205,7 @@ fn MorseFormControl(
                             id: "stop-output",
                             img {
                                 class: "fill-none",
-                                src: "/dot-dash/images/stop.svg",
+                                src: asset!("/public/images/stop.svg"),
                                 height: 20,
                                 width: 20
                             }
@@ -232,7 +232,7 @@ fn MorseFormControl(
 
                         img {
                             class: "fill-none",
-                            src: "/dot-dash/images/clipboard.svg",
+                            src: asset!("/public/images/clipboard.svg"),
                             height: 20,
                             width: 20
                         }
@@ -263,7 +263,7 @@ fn ShowOptions(show_options: Signal<bool>) -> Element {
 
             span { class: "inline-flex",
                 img {
-                    src: "/dot-dash/images/options.svg",
+                    src: asset!("/public/images/options.svg"),
                     height: 24,
                     width: 24
                 }
@@ -285,7 +285,7 @@ fn HideOptions(show_options: Signal<bool>) -> Element {
             span { class: "inline-flex",
                 img {
                     class: "fill-none",
-                    src: "/dot-dash/images/hide.svg",
+                    src: asset!("/public/images/hide.svg"),
                     height: 24,
                     width: 24
                 }

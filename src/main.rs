@@ -5,9 +5,12 @@ use routes::{home::Home, page_not_found::PageNotFound};
 pub mod platforms;
 pub mod routes;
 
+const STYLE: &str = asset!("./public/styles/tailwind/tailwind.css");
+
 #[derive(Clone, Routable, Debug, PartialEq)]
 enum Route {
-    #[route("/dot-dash/")]
+    #[cfg_attr(target_arch = "wasm32", route("/dot-dash/"))]
+    #[cfg_attr(not(target_arch = "wasm32"), route("/"))]
     Home {},
     // PageNotFound is a catch all route that will match any route and placing the matched segments in the route field
     #[route("/:..route")]
@@ -29,7 +32,7 @@ fn main() {
                 .with_always_on_top(false)
                 .with_min_inner_size(LogicalSize::new(400, 600)),
         );
-        LaunchBuilder::desktop().with_cfg(cfg).launch(App);
+        LaunchBuilder::desktop().with_cfg(cfg).launch(app);
     }
 
     #[cfg(target_arch = "wasm32")]
@@ -40,7 +43,7 @@ fn main() {
 
 fn app() -> Element {
     rsx! {
-        head::Link { rel: "stylesheet", href: "/dot-dash/styles/tailwind/tailwind.css" }
+        head::Link { rel: "stylesheet", href: STYLE }
         Router::<Route> {}
     }
 }

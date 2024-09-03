@@ -9,7 +9,6 @@ edition = "2021"
 derive_more = { version = "1.0.0", features = ["display"] }
 dioxus = { version = "=0.6.0-alpha.2", features = ["router"] }
 dioxus-logger = "0.5.1"
-# manganis = "0.2.2"
 morsify = { git = "https://github.com/martial-plains/morsify", branch = "main", version = "0.1.0" }
 
 
