@@ -1,7 +1,4 @@
-use dioxus::{
-    desktop::{LogicalSize, WindowBuilder},
-    prelude::*,
-};
+use dioxus::prelude::*;
 use dioxus_logger::tracing::{info, Level};
 use routes::home::Home;
 
@@ -23,6 +20,8 @@ fn main() {
 
     #[cfg(not(target_arch = "wasm32"))]
     {
+        use dioxus::desktop::{LogicalSize, WindowBuilder};
+
         let cfg = dioxus::desktop::Config::new().with_window(
             WindowBuilder::new()
                 .with_title("Dot Dash")
