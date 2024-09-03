@@ -1,5 +1,4 @@
 [application]
-
 # App (Project) Name
 name = "dot-dash"
 
@@ -14,6 +13,8 @@ out_dir = "dist"
 asset_dir = "public"
 
 [web.app]
+base_path = "/dot-dash/"
+
 # HTML title tag content
 title = "Dot Dash"
 
