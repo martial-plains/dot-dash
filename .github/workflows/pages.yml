@@ -22,24 +22,20 @@ jobs:
       with:
         toolchain: nightly
         target: wasm32-unknown-unknown
-    - name: setup-dioxus-cli
-      run: |
-        cargo install dioxus-cli
 
     # build css and rust
     - name: build css
       run: |
         deno run build_css
-    - name: builds dioxus
+        
+    # build css and rust
+    - name: build css
+      run: |
+        deno run build_css
+    - name: build dioxus
       run: |
         rustup override set nightly
-        dx build --release --platform=web
 
     # deploy for github.io
-    - name: GitHub Pages action
-      uses: peaceiris/actions-gh-pages@v3.7.3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages
-        publish_dir: dist
-        # cname: abex.dev
+    - name: Dioxus Deploy
+      uses: DioxusLabs/deploy-action@0.1.1
