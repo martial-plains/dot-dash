@@ -5,8 +5,6 @@ use routes::{home::Home, page_not_found::PageNotFound};
 pub mod platforms;
 pub mod routes;
 
-const TAILWIND_CSS: &str = asset!("./public/styles/tailwind/tailwind.css");
-
 #[derive(Clone, Routable, Debug, PartialEq)]
 enum Route {
     #[route("/dot-dash/")]
@@ -42,7 +40,7 @@ fn main() {
 
 fn app() -> Element {
     rsx! {
-        head::Link { rel: "stylesheet", href: "dot-dash/styles/tailwind/tailwind.css" }
+        head::Link { rel: "stylesheet", href: "/dot-dash/styles/tailwind/tailwind.css" }
         Router::<Route> {}
     }
 }
