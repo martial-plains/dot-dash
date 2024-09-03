@@ -33,7 +33,7 @@ jobs:
     - name: builds dioxus
       run: |
         rustup override set nightly
-        dx build --release
+        dx build --release --platform=web
 
     # deploy for github.io
     - name: GitHub Pages action
