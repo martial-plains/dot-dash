@@ -1,11 +1,12 @@
 use dioxus::prelude::*;
-use morsify::{decode, encode, Options as MorseOptions};
+use morsify::{MorseCode, Options as MorseOptions};
 
 #[component]
 pub fn Home() -> Element {
     let mut text = use_signal(String::new);
     let mut morse = use_signal(String::new);
     let show_options = use_signal(|| false);
+    let morse_code = use_signal(MorseCode::default);
 
     let morse_opts = use_signal(|| MorseOptions {
         dot: '.',
@@ -26,7 +27,7 @@ pub fn Home() -> Element {
                     ontextinput: move |e: Event<FormData>| {
                         let value: String = e.value();
                         text.set(value.clone());
-                        morse.set(encode(&value, &morse_opts.read()));
+                        morse.set(morse_code().encode(&value));
                     }
                 }
 
@@ -35,7 +36,7 @@ pub fn Home() -> Element {
                     ontextinput: move |e: Event<FormData>| {
                         let value: String = e.value();
                         morse.set(value.clone());
-                        text.set(decode(&value, &morse_opts.read()));
+                        text.set(morse_code().decode(&value));
                     },
                     morse_opts
                 }
@@ -53,7 +54,7 @@ pub fn Home() -> Element {
                     wpm,
                     frequency,
                     oninput: move |_| {
-                        morse.set(encode(&text(), &morse_opts()));
+                        morse.set(morse_code().encode(text()));
                     }
                 }
             }
