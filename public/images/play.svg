@@ -1,4 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" stroke-linecap="round"
-    stroke-linejoin="round">
-    <polygon points="5 3 19 12 5 21 5 3" fill="none" stroke-width="1.5px" stroke="black"></polygon>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5" viewBox="0 0 24 24"><polygon fill="none" stroke="#000" stroke-width="1.5" points="5 3 19 12 5 21 5 3"/></svg>
