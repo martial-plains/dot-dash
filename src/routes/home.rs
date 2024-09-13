@@ -69,7 +69,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
     rsx! {
         div { class: "flex flex-col",
             label { r#for: "input", class: "label",
-                span { class: "label-text font-semibold text-lg", "Text" }
+                span { class: "label-text font-semibold text-lg dark:text-white", "Text" }
                 span { class: "label-text-alt flex gap-4",
                     span {
                         title: "Play the Audio",
@@ -89,7 +89,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                             }
                         },
                         img {
-                            class: "fill-none",
+                            class: "fill-current dark:filter dark:invert",
                             src: asset!("/public/images/play.svg"),
                             height: 20,
                             width: 20
@@ -100,7 +100,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                         class: format!("tooltip cursor-pointer {}", if is_playing() { "" } else { "hidden" }),
                         id: "stop-input",
                         img {
-                            class: "fill-none",
+                            class: "fill-none dark:filter dark:invert",
                             src: asset!("/public/images/stop.svg"),
                             height: 20,
                             width: 20
@@ -126,7 +126,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                             }
                         },
                         img {
-                            class: "fill-none",
+                            class: "fill-none dark:filter dark:invert",
                             src: asset!("/public/images/clipboard.svg"),
                             height: 20,
                             width: 20
@@ -135,7 +135,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                 }
             }
             textarea {
-                class: "textarea textarea-bordered w-full h-96 bg-base-100 border-solid border-2",
+                class: "textarea textarea-bordered w-full h-96 bg-base-100 border-solid border-2 dark:text-white dark:bg-[#24283B]",
                 id: "input",
                 value: text,
                 oninput: move |e| ontextinput.call(e)
@@ -155,7 +155,7 @@ fn MorseFormControl(
     rsx! {
         div { class: "flex flex-col",
             label { r#for: "output", class: "label",
-                span { class: "label-text font-semibold text-lg", "Morse Code" }
+                span { class: "label-text font-semibold text-lg dark:text-white", "Morse Code" }
                 span { class: "label-text-alt flex gap-4",
                     if !is_playing() {
                         span {
@@ -190,7 +190,7 @@ fn MorseFormControl(
                                 }
                             },
                             img {
-                                class: "fill-none",
+                                class: "fill-none dark:filter dark:invert",
                                 src: asset!("public/images/play.svg"),
                                 height: 20,
                                 width: 20
@@ -205,7 +205,7 @@ fn MorseFormControl(
                             class: "cursor-pointer",
                             id: "stop-output",
                             img {
-                                class: "fill-none",
+                                class: "fill-none dark:filter dark:invert",
                                 src: asset!("/public/images/stop.svg"),
                                 height: 20,
                                 width: 20
@@ -232,7 +232,7 @@ fn MorseFormControl(
                         },
 
                         img {
-                            class: "fill-none",
+                            class: "fill-none dark:filter dark:invert",
                             src: asset!("/public/images/clipboard.svg"),
                             height: 20,
                             width: 20
@@ -241,7 +241,7 @@ fn MorseFormControl(
                 }
             }
             textarea {
-                class: "textarea textarea-bordered w-full h-96 lg:h-full bg-base-100 border-solid border-2",
+                class: "textarea textarea-bordered w-full h-96 lg:h-full bg-base-100 border-solid border-2 dark:text-white dark:bg-[#24283B]",
                 id: "output",
                 value: morse,
                 oninput: move |e| {
@@ -264,6 +264,7 @@ fn ShowOptions(show_options: Signal<bool>) -> Element {
 
             span { class: "inline-flex",
                 img {
+                    class: "dark:filter dark:invert",
                     src: asset!("/public/images/options.svg"),
                     height: 24,
                     width: 24
@@ -285,13 +286,14 @@ fn HideOptions(show_options: Signal<bool>) -> Element {
             },
             span { class: "inline-flex",
                 img {
+                    class: "dark:filter dark:invert",
                     class: "fill-none",
                     src: asset!("/public/images/hide.svg"),
                     height: 24,
                     width: 24
                 }
             }
-            span { class: "hidden sm:inline-flex", "Hide Options" }
+            span { class: "hidden sm:inline-flex dark:text-white", "Hide Options" }
         }
     }
 }
@@ -305,13 +307,13 @@ fn Options(
 ) -> Element {
     rsx! {
         div { class: "my-12", id: "options",
-            h2 { class: "divider divider-neutral text-center text-lg sm:text-2xl font-bold my-6",
+            h2 { class: "divider divider-neutral text-center text-lg sm:text-2xl font-bold my-6 dark:text-white",
                 "Options"
             }
             div { class: "grid grid-cols-2 md:grid-cols-4 gap-6 my-4",
                 div { class: "form-control w-full",
                     label { r#for: "dot", class: "label",
-                        span { class: "label-text font-semibold text-base", "Dot" }
+                        span { class: "label-text font-semibold text-base dark:text-white", "Dot" }
                     }
                     input {
                         value: morse_opts().dot.to_string(),
@@ -331,7 +333,7 @@ fn Options(
                 }
                 div { class: "form-control w-full",
                     label { r#for: "dash", class: "label",
-                        span { class: "label-text font-semibold text-base", "Dash" }
+                        span { class: "label-text font-semibold text-base dark:text-white", "Dash" }
                     }
                     input {
                         value: morse_opts().dash.to_string(),
@@ -351,7 +353,7 @@ fn Options(
                 }
                 div { class: "form-control w-full",
                     label { r#for: "space", class: "label",
-                        span { class: "label-text font-semibold text-base", "Space" }
+                        span { class: "label-text font-semibold text-base dark:text-white", "Space" }
                     }
                     input {
                         r#type: "text",
@@ -370,7 +372,7 @@ fn Options(
                 }
                 div { class: "form-control w-full",
                     label { r#for: "separator", class: "label",
-                        span { class: "label-text font-semibold text-base", "Separator" }
+                        span { class: "label-text font-semibold text-base dark:text-white", "Separator" }
                     }
                     input {
                         value: morse_opts().separator.to_string(),
@@ -389,7 +391,7 @@ fn Options(
                 }
                 div { class: "form-control w-full",
                     label { r#for: "wpm", class: "label",
-                        span { class: "label-text font-semibold text-base", "WPM" }
+                        span { class: "label-text font-semibold text-base dark:text-white", "WPM" }
                     }
                     input {
                         r#type: "number",
@@ -404,7 +406,7 @@ fn Options(
                 }
                 div { class: "form-control w-full",
                     label { r#for: "frequency", class: "label",
-                        span { class: "label-text font-semibold text-base", "Frequency (Hz)" }
+                        span { class: "label-text font-semibold text-base dark:text-white", "Frequency (Hz)" }
                     }
                     input {
                         r#type: "number",

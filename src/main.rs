@@ -43,6 +43,10 @@ fn main() {
 fn app() -> Element {
     rsx! {
         head::Link { rel: "stylesheet", href: STYLE }
-        Router::<Route> {}
+        div {
+            class: "bg-transparent dark:bg-slate-800 min-h-screen w-screen",
+            Router::<Route> {}
+        }
+
     }
 }
