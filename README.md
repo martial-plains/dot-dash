@@ -32,8 +32,6 @@ makes it a reliable tool for anyone who needs to translate Morse code.
 
 - [Getting Started](#getting-started)
 - [Testing Locally](#testing-locally)
-- [Web Locally](#web-locally)
-- [Web Deploy](#web-deploy)
 
 ## Getting Started
 
