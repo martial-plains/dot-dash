@@ -270,7 +270,7 @@ fn ShowOptions(show_options: Signal<bool>) -> Element {
                     width: 24
                 }
             }
-            span { class: "hidden sm:inline-flex", "Options" }
+            span { class: "hidden sm:inline-flex  dark:text-white", "Options" }
         }
     }
 }
@@ -320,7 +320,7 @@ fn Options(
                         r#type: "text",
                         prevent_default: "oninput",
                         maxlength: 1,
-                        class: "input input-bordered w-full",
+                        class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "dot",
                         oninput: move |e| {
                             let Ok(dot) = e.value().parse() else {
@@ -340,7 +340,7 @@ fn Options(
                         prevent_default: "oninput",
                         r#type: "text",
                         maxlength: 1,
-                        class: "input input-bordered w-full",
+                        class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "dash",
                         oninput: move |e| {
                             let Ok(dash) = e.value().parse() else {
@@ -359,7 +359,7 @@ fn Options(
                         r#type: "text",
                         maxlength: 1,
                         value: morse_opts().space.to_string(),
-                        class: "input input-bordered w-full",
+                        class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "space",
                         oninput: move |e| {
                             let Ok(space) = e.value().parse() else {
@@ -378,7 +378,7 @@ fn Options(
                         value: morse_opts().separator.to_string(),
                         r#type: "text",
                         maxlength: 1,
-                        class: "input input-bordered w-full",
+                        class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "separator",
                         oninput: move |e| {
                             let Ok(separator) = e.value().parse() else {
@@ -396,7 +396,7 @@ fn Options(
                     input {
                         r#type: "number",
                         value: wpm,
-                        class: "input input-bordered w-full",
+                        class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "wpm",
                         oninput: move |e| {
                             wpm.set(e.value().parse::<i64>().unwrap_or_default());
@@ -411,7 +411,7 @@ fn Options(
                     input {
                         r#type: "number",
                         value: frequency,
-                        class: "input input-bordered w-full",
+                        class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "frequency",
                         onchange: move |e| {
                             frequency.set(e.value().parse::<i64>().unwrap_or_default());
