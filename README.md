@@ -44,6 +44,12 @@ running:
 rustup update
 ```
 
+Next, lets install the Dioxus CLI:
+
+```bash
+cargo install dioxus-cli
+```
+
 ## Testing Locally
 
 To test the application locally, run:
@@ -57,15 +63,7 @@ cargo run --release
 If you're on Linux, you need to install some packages first:
 
 ```bash
-sudo apt-get install libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev
-```
-
-### Fedora Rawhide
-
-If you're on Fedora Rawhide, you need to install some packages first:
-
-```bash
-dnf install clang clang-devel clang-tools-extra libxkbcommon-devel pkg-config openssl-devel libxcb-devel gtk3-devel atk fontconfig-devel
+sudo apt-get install libwebkit2gtk-4.1-dev libgtk-3-dev libayatana-appindicator3-dev libxdo-dev libasound2-dev
 ```
 
 ## Web Locally
