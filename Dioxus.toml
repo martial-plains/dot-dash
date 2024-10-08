@@ -13,7 +13,7 @@ out_dir = "dist"
 asset_dir = "public"
 
 [web.app]
-base_path = "/dot-dash/"
+# base_path = "/dot-dash/"
 
 # HTML title tag content
 title = "Dot Dash"
