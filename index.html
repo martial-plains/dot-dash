@@ -11,8 +11,8 @@
 <body>
     <div id="main"></div>
     <script type="module">
-        import init from "/dot-dash/assets/dioxus/dot-dash.js";
-        init("/dot-dash/assets/dioxus/dot-dash_bg.wasm").then(wasm => {
+        import init from "/./assets/dioxus/dot-dash.js";
+        init("/./assets/dioxus/dot-dash_bg.wasm").then(wasm => {
             if (wasm.__wbindgen_start == undefined) {
                 wasm.main();
             }
