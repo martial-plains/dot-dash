@@ -7,12 +7,17 @@ on:
   pull_request:
     branches: [ main ]
 
+
+
 permissions:
   contents: write # for committing to gh-pages branch.
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    env:
+      DIOXUS_PLATFORM: web
 
     steps:
     # configure the environment
@@ -37,7 +42,7 @@ jobs:
     - name: build css
       run: |
         deno run -A dev.ts
-        deno run build_css && dx build --release --platform="web"
+        deno run build_css && dx build --release
     - name: Upload the build output
       uses: actions/upload-artifact@v4
       with:

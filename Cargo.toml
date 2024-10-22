@@ -8,8 +8,10 @@ edition = "2021"
 [dependencies]
 derive_more = { version = "1.0.0", features = ["display"] }
 dioxus = { version = "=0.6.0-alpha.3", features = ["router"] }
+dioxus-cli-config = "=0.6.0-alpha.3"
 dioxus-logger = "0.5.1"
 morsify = { version = "0.1.0" }
+serde = "1.0.211"
 
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
@@ -42,6 +44,10 @@ objc2-app-kit = { version = "0.2.2", features = [
     "NSPasteboard",
     "NSSpeechSynthesizer",
 ] }
+
+[build-dependencies]
+serde = "1.0.211"
+toml = "0.8.19"
 
 [profile.release]
 opt-level = 2 # fast and small wasm
