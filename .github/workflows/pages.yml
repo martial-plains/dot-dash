@@ -31,7 +31,7 @@ jobs:
     - uses: Swatinem/rust-cache@v2
     - name: Install Dioxus-CLI
       shell: bash
-      run: cargo install dioxus-cli@0.6.0-alpha.2
+      run: cargo install --git https://github.com/DioxusLabs/dioxus.git
         
     # build css and rust
     - name: build css
