@@ -42,7 +42,7 @@ jobs:
     - name: build css
       run: |
         deno run -A dev.ts
-        deno run build_css && dx build --release
+        deno run build_css && dx build --release --target wasm32-unknown-unknown --platform web
     - name: Upload the build output
       uses: actions/upload-artifact@v4
       with:
