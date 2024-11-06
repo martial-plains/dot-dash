@@ -36,7 +36,7 @@ jobs:
     - uses: Swatinem/rust-cache@v2
     - name: Install Dioxus-CLI
       shell: bash
-      run: cargo install dioxus-cli@0.6.0-alpha.3
+      run: cargo install dioxus-cli@0.6.0-alpha.4
         
     # build css and rust
     - name: build css
@@ -48,7 +48,7 @@ jobs:
       with:
         name: build-output
         path: |
-          dist
+          target/dx/dot_dash/release/web/public
         retention-days: 1
 
   deploy:
