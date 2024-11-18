@@ -1,8 +1,8 @@
 import { RawInterpreter } from './snippets/dioxus-interpreter-js-4f37c5a4b5d73981/inline0.js';
 import { setAttributeInner } from './snippets/dioxus-interpreter-js-4f37c5a4b5d73981/src/js/common.js';
-import { get_select_data } from './snippets/dioxus-web-2d8adaece36cca24/inline0.js';
-import { WebDioxusChannel } from './snippets/dioxus-web-2d8adaece36cca24/src/js/eval.js';
-import * as __wbg_star0 from './snippets/dioxus-web-2d8adaece36cca24/inline1.js';
+import { get_select_data } from './snippets/dioxus-web-d038e9635b9ccd74/inline0.js';
+import { WebDioxusChannel } from './snippets/dioxus-web-d038e9635b9ccd74/src/js/eval.js';
+import * as __wbg_star0 from './snippets/dioxus-web-d038e9635b9ccd74/inline1.js';
 
 const lAudioContext = (typeof AudioContext !== 'undefined' ? AudioContext : (typeof webkitAudioContext !== 'undefined' ? webkitAudioContext : undefined));
 let wasm;
@@ -194,15 +194,15 @@ function __wbg_adapter_50(arg0, arg1) {
 }
 
 function __wbg_adapter_53(arg0, arg1) {
-    wasm._ZN132__LT_dyn_u20_core__ops__function__FnMut_LT__LP__RP__GT__u2b_Output_u20__u3d__u20_R_u20_as_u20_wasm_bindgen__closure__WasmClosure_GT_8describe6invoke17hbda84ff7eb755a10E(arg0, arg1);
+    wasm._ZN132__LT_dyn_u20_core__ops__function__FnMut_LT__LP__RP__GT__u2b_Output_u20__u3d__u20_R_u20_as_u20_wasm_bindgen__closure__WasmClosure_GT_8describe6invoke17hdd82e2ca3d0c1b4bE(arg0, arg1);
 }
 
 function __wbg_adapter_56(arg0, arg1, arg2) {
-    wasm.closure392_externref_shim(arg0, arg1, arg2);
+    wasm.closure371_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_59(arg0, arg1, arg2) {
-    wasm.closure395_externref_shim(arg0, arg1, arg2);
+    wasm.closure374_externref_shim(arg0, arg1, arg2);
 }
 
 function __wbg_adapter_62(arg0, arg1, arg2) {
@@ -415,18 +415,6 @@ function __wbg_get_imports() {
         const ret = getStringFromWasm0(arg0, arg1);
         return ret;
     };
-    imports.wbg.__wbg_new_afcd5cea005c1dbc = function(arg0) {
-        const ret = new WebDioxusChannel(JSOwner.__wrap(arg0));
-        return ret;
-    };
-    imports.wbg.__wbg_weak_0cc98c4ccb878167 = function(arg0) {
-        const ret = arg0.weak();
-        return ret;
-    };
-    imports.wbg.__wbindgen_is_undefined = function(arg0) {
-        const ret = arg0 === undefined;
-        return ret;
-    };
     imports.wbg.__wbindgen_string_get = function(arg0, arg1) {
         const obj = arg1;
         const ret = typeof(obj) === 'string' ? obj : undefined;
@@ -434,13 +422,6 @@ function __wbg_get_imports() {
         var len1 = WASM_VECTOR_LEN;
         getDataViewMemory0().setInt32(arg0 + 4 * 1, len1, true);
         getDataViewMemory0().setInt32(arg0 + 4 * 0, ptr1, true);
-    };
-    imports.wbg.__wbg_rustSend_57a07c136ffacd02 = function(arg0, arg1) {
-        arg0.rustSend(arg1);
-    };
-    imports.wbg.__wbg_rustRecv_6c9722185edcb85b = function(arg0) {
-        const ret = arg0.rustRecv();
-        return ret;
     };
     imports.wbg.__wbindgen_number_new = function(arg0) {
         const ret = arg0;
@@ -452,11 +433,30 @@ function __wbg_get_imports() {
         getDataViewMemory0().setFloat64(arg0 + 8 * 1, isLikeNone(ret) ? 0 : ret, true);
         getDataViewMemory0().setInt32(arg0 + 4 * 0, !isLikeNone(ret), true);
     };
+    imports.wbg.__wbg_new_6a190d36daa9abe7 = function(arg0) {
+        const ret = new WebDioxusChannel(JSOwner.__wrap(arg0));
+        return ret;
+    };
+    imports.wbg.__wbg_weak_62cfc5cb0d510c99 = function(arg0) {
+        const ret = arg0.weak();
+        return ret;
+    };
+    imports.wbg.__wbindgen_is_undefined = function(arg0) {
+        const ret = arg0 === undefined;
+        return ret;
+    };
+    imports.wbg.__wbg_rustSend_934a82c67a2c7db9 = function(arg0, arg1) {
+        arg0.rustSend(arg1);
+    };
+    imports.wbg.__wbg_rustRecv_d9a2e6a5716c2bba = function(arg0) {
+        const ret = arg0.rustRecv();
+        return ret;
+    };
     imports.wbg.__wbindgen_error_new = function(arg0, arg1) {
         const ret = new Error(getStringFromWasm0(arg0, arg1));
         return ret;
     };
-    imports.wbg.__wbg_getselectdata_80124339993dbc65 = function(arg0, arg1) {
+    imports.wbg.__wbg_getselectdata_bb77d9811560c281 = function(arg0, arg1) {
         const ret = get_select_data(arg1);
         const ptr1 = passArrayJsValueToWasm0(ret, wasm.__wbindgen_malloc);
         const len1 = WASM_VECTOR_LEN;
@@ -1439,23 +1439,23 @@ function __wbg_get_imports() {
         const ret = wasm.memory;
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper701 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper699 = function(arg0, arg1, arg2) {
         const ret = makeMutClosure(arg0, arg1, 218, __wbg_adapter_50);
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper1009 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 389, __wbg_adapter_53);
+    imports.wbg.__wbindgen_closure_wrapper964 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 368, __wbg_adapter_53);
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper1011 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 389, __wbg_adapter_56);
+    imports.wbg.__wbindgen_closure_wrapper966 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 368, __wbg_adapter_56);
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper1013 = function(arg0, arg1, arg2) {
-        const ret = makeMutClosure(arg0, arg1, 389, __wbg_adapter_59);
+    imports.wbg.__wbindgen_closure_wrapper968 = function(arg0, arg1, arg2) {
+        const ret = makeMutClosure(arg0, arg1, 368, __wbg_adapter_59);
         return ret;
     };
-    imports.wbg.__wbindgen_closure_wrapper1426 = function(arg0, arg1, arg2) {
+    imports.wbg.__wbindgen_closure_wrapper1424 = function(arg0, arg1, arg2) {
         const ret = makeMutClosure(arg0, arg1, 660, __wbg_adapter_62);
         return ret;
     };
@@ -1469,7 +1469,7 @@ function __wbg_get_imports() {
         table.set(offset + 3, false);
         ;
     };
-    imports['./snippets/dioxus-web-2d8adaece36cca24/inline1.js'] = __wbg_star0;
+    imports['./snippets/dioxus-web-d038e9635b9ccd74/inline1.js'] = __wbg_star0;
 
     return imports;
 }
