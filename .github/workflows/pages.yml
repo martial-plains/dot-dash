@@ -36,13 +36,13 @@ jobs:
     - uses: Swatinem/rust-cache@v2
     - name: Install Dioxus-CLI
       shell: bash
-      run: cargo install dioxus-cli@0.6.0-alpha.4
+      run: cargo install dioxus-cli@0.6.0-alpha.5
         
     # build css and rust
     - name: build css
       run: |
         deno run -A dev.ts
-        deno run build_css && dx build --release --features web
+        deno run build_css && dx build --release --platform web
     - name: Upload the build output
       uses: actions/upload-artifact@v4
       with:

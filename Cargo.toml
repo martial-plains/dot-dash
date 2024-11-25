@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 derive_more = { version = "1.0.0", features = ["display"] }
-dioxus = { version = "=0.6.0-alpha.4", features = ["router"] }
+dioxus = { version = "=0.6.0-alpha.5", features = ["router"] }
 dioxus-cli-config = "=0.6.0-alpha.5"
 dioxus-logger = "0.5.1"
 morsify = { version = "0.1.0" }
