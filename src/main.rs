@@ -1,11 +1,11 @@
 use dioxus::prelude::*;
-use dioxus_logger::tracing::{info, Level};
-use routes::{home::Home, page_not_found::PageNotFound};
+use dioxus_logger::tracing::Level;
+use routes::home::Home;
 
 pub mod platforms;
 pub mod routes;
 
-const STYLE: Asset = asset!("./public/styles/tailwind/tailwind.css");
+const STYLE: Asset = asset!("/public/styles/tailwind/tailwind.css");
 
 #[derive(Clone, Routable, Debug, PartialEq)]
 enum Route {

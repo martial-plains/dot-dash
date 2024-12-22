@@ -28,7 +28,7 @@ pub fn Home() -> Element {
                         let value: String = e.value();
                         text.set(value.clone());
                         morse.set(morse_code().encode(&value));
-                    }
+                    },
                 }
 
                 MorseFormControl {
@@ -38,7 +38,7 @@ pub fn Home() -> Element {
                         morse.set(value.clone());
                         text.set(morse_code().decode(&value));
                     },
-                    morse_opts
+                    morse_opts,
                 }
             }
             div { class: "grid grid-cols-1 gap-4 mt-6",
@@ -55,7 +55,7 @@ pub fn Home() -> Element {
                     frequency,
                     oninput: move |_| {
                         morse.set(morse_code().encode(text()));
-                    }
+                    },
                 }
             }
         }
@@ -92,7 +92,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                             class: "fill-current dark:filter dark:invert",
                             src: asset!("/public/images/play.svg"),
                             height: 20,
-                            width: 20
+                            width: 20,
                         }
                     }
                     span {
@@ -103,7 +103,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                             class: "fill-none dark:filter dark:invert",
                             src: asset!("/public/images/stop.svg"),
                             height: 20,
-                            width: 20
+                            width: 20,
                         }
                     }
 
@@ -129,7 +129,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                             class: "fill-none dark:filter dark:invert",
                             src: asset!("/public/images/clipboard.svg"),
                             height: 20,
-                            width: 20
+                            width: 20,
                         }
                     }
                 }
@@ -138,7 +138,7 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                 class: "textarea textarea-bordered w-full h-96 bg-base-100 border-solid border-2 dark:text-white dark:bg-[#24283B]",
                 id: "input",
                 value: text,
-                oninput: move |e| ontextinput.call(e)
+                oninput: move |e| ontextinput.call(e),
             }
         }
     }
@@ -193,7 +193,7 @@ fn MorseFormControl(
                                 class: "fill-none dark:filter dark:invert",
                                 src: asset!("public/images/play.svg"),
                                 height: 20,
-                                width: 20
+                                width: 20,
                             }
                         }
                     }
@@ -208,7 +208,7 @@ fn MorseFormControl(
                                 class: "fill-none dark:filter dark:invert",
                                 src: asset!("/public/images/stop.svg"),
                                 height: 20,
-                                width: 20
+                                width: 20,
                             }
                         }
                     }
@@ -235,7 +235,7 @@ fn MorseFormControl(
                             class: "fill-none dark:filter dark:invert",
                             src: asset!("/public/images/clipboard.svg"),
                             height: 20,
-                            width: 20
+                            width: 20,
                         }
                     }
                 }
@@ -246,7 +246,7 @@ fn MorseFormControl(
                 value: morse,
                 oninput: move |e| {
                     ontextinput.call(e);
-                }
+                },
             }
         }
     }
@@ -267,7 +267,7 @@ fn ShowOptions(show_options: Signal<bool>) -> Element {
                     class: "dark:filter dark:invert",
                     src: asset!("/public/images/options.svg"),
                     height: 24,
-                    width: 24
+                    width: 24,
                 }
             }
             span { class: "hidden sm:inline-flex  dark:text-white", "Options" }
@@ -290,7 +290,7 @@ fn HideOptions(show_options: Signal<bool>) -> Element {
                     class: "fill-none",
                     src: asset!("/public/images/hide.svg"),
                     height: 24,
-                    width: 24
+                    width: 24,
                 }
             }
             span { class: "hidden sm:inline-flex dark:text-white", "Hide Options" }
@@ -313,47 +313,53 @@ fn Options(
             div { class: "grid grid-cols-2 md:grid-cols-4 gap-6 my-4",
                 div { class: "form-control w-full",
                     label { r#for: "dot", class: "label",
-                        span { class: "label-text font-semibold text-base dark:text-white", "Dot" }
+                        span { class: "label-text font-semibold text-base dark:text-white",
+                            "Dot"
+                        }
                     }
                     input {
                         value: morse_opts().dot.to_string(),
                         r#type: "text",
-                        prevent_default: "oninput",
                         maxlength: 1,
                         class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "dot",
                         oninput: move |e| {
+                            e.prevent_default();
                             let Ok(dot) = e.value().parse() else {
                                 return;
                             };
                             morse_opts.write().dot = dot;
                             oninput(e);
-                        }
+                        },
                     }
                 }
                 div { class: "form-control w-full",
                     label { r#for: "dash", class: "label",
-                        span { class: "label-text font-semibold text-base dark:text-white", "Dash" }
+                        span { class: "label-text font-semibold text-base dark:text-white",
+                            "Dash"
+                        }
                     }
                     input {
                         value: morse_opts().dash.to_string(),
-                        prevent_default: "oninput",
                         r#type: "text",
                         maxlength: 1,
                         class: "input input-bordered w-full dark:text-white dark:bg-[#24283B]",
                         id: "dash",
                         oninput: move |e| {
+                            e.prevent_default();
                             let Ok(dash) = e.value().parse() else {
                                 return;
                             };
                             morse_opts.write().dash = dash;
                             oninput(e);
-                        }
+                        },
                     }
                 }
                 div { class: "form-control w-full",
                     label { r#for: "space", class: "label",
-                        span { class: "label-text font-semibold text-base dark:text-white", "Space" }
+                        span { class: "label-text font-semibold text-base dark:text-white",
+                            "Space"
+                        }
                     }
                     input {
                         r#type: "text",
@@ -367,12 +373,14 @@ fn Options(
                             };
                             morse_opts.write().space = space;
                             oninput(e);
-                        }
+                        },
                     }
                 }
                 div { class: "form-control w-full",
                     label { r#for: "separator", class: "label",
-                        span { class: "label-text font-semibold text-base dark:text-white", "Separator" }
+                        span { class: "label-text font-semibold text-base dark:text-white",
+                            "Separator"
+                        }
                     }
                     input {
                         value: morse_opts().separator.to_string(),
@@ -386,12 +394,14 @@ fn Options(
                             };
                             morse_opts.write().separator = separator;
                             oninput(e);
-                        }
+                        },
                     }
                 }
                 div { class: "form-control w-full",
                     label { r#for: "wpm", class: "label",
-                        span { class: "label-text font-semibold text-base dark:text-white", "WPM" }
+                        span { class: "label-text font-semibold text-base dark:text-white",
+                            "WPM"
+                        }
                     }
                     input {
                         r#type: "number",
@@ -401,12 +411,14 @@ fn Options(
                         oninput: move |e| {
                             wpm.set(e.value().parse::<i64>().unwrap_or_default());
                             oninput(e);
-                        }
+                        },
                     }
                 }
                 div { class: "form-control w-full",
                     label { r#for: "frequency", class: "label",
-                        span { class: "label-text font-semibold text-base dark:text-white", "Frequency (Hz)" }
+                        span { class: "label-text font-semibold text-base dark:text-white",
+                            "Frequency (Hz)"
+                        }
                     }
                     input {
                         r#type: "number",
@@ -416,7 +428,7 @@ fn Options(
                         onchange: move |e| {
                             frequency.set(e.value().parse::<i64>().unwrap_or_default());
                             oninput(e);
-                        }
+                        },
                     }
                 }
             }
