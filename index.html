@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>dioxus | ⛺</title>
+    <title>Dot Dash</title>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="UTF-8" />
-  <link rel="preload" href="/./wasm/dot_dash_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
-            <link rel="preload" href="/./wasm/dot_dash.js" as="script">
+  <link rel="preload" href="/dot-dash/wasm/dot_dash_bg.wasm" as="fetch" type="application/wasm" crossorigin="">
+            <link rel="preload" href="/dot-dash/wasm/dot_dash.js" as="script">
             </head>
   <body>
     <div id="main"></div>
   <script>
             // We can't use a module script here because we need to start the script immediately when streaming
-            import("/./wasm/dot_dash.js").then(
+            import("/dot-dash/wasm/dot_dash.js").then(
                 ({ default: init }) => {
-                init("/./wasm/dot_dash_bg.wasm").then((wasm) => {
+                init("/dot-dash/wasm/dot_dash_bg.wasm").then((wasm) => {
                     if (wasm.__wbindgen_start == undefined) {
                     wasm.main();
                     }
