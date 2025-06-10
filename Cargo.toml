@@ -19,7 +19,7 @@ web = ["dioxus/web"]
 
 
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
-cpal = "0.15.3"
+cpal = "0.16.0"
 rodio = "0.20.1"
 
 [target.'cfg(target_arch = "wasm32")'.dependencies]
