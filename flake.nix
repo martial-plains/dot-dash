@@ -1,21 +1,28 @@
 {
   inputs = {
-    naersk.url = "github:nix-community/naersk/master";
+    rust-overlay.url = "github:oxalica/rust-overlay";
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, nixpkgs, utils, naersk }:
+  outputs = { self, nixpkgs, rust-overlay,  utils }:
     utils.lib.eachDefaultSystem (system:
       let
-        pkgs = import nixpkgs { inherit system; };
-        naersk-lib = pkgs.callPackage naersk { };
+        overlays = [ (import rust-overlay) ];
+        pkgs = import nixpkgs {
+          inherit system overlays;
+        };
       in
       {
-        defaultPackage = naersk-lib.buildPackage ./.;
-        devShell = with pkgs; mkShell {
-          buildInputs = [ cargo rustup rustc rustfmt pre-commit rustPackages.clippy lldb gtk4 ];
-          RUST_SRC_PATH = rustPlatform.rustLibSrc;
+        devShells.default = with pkgs; mkShell {
+          buildInputs = [
+            rust-bin.nightly.latest.default
+            pre-commit
+            lldb
+            gtk4
+            pkg-config
+            alsa-lib.dev
+          ];
         };
       }
     );
