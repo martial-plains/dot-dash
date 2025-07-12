@@ -30,7 +30,7 @@ pub fn copy_to_clipboard(text: &str) {
         let pasteboard = NSPasteboard::generalPasteboard();
         let _ = pasteboard.clearContents();
         let obj = ProtocolObject::from_retained(text);
-        let objects = NSArray::from_vec(vec![obj]);
+        let objects = NSArray::from_retained_slice(&[obj]);
         let res = pasteboard.writeObjects(&objects);
         assert!(res, "Failed writing to pasteboard");
     };

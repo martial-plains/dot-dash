@@ -1,0 +1,38 @@
+[package]
+name = "dot-dash"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+morsify = { workspace = true }
+
+
+[target.'cfg(not(target_arch = "wasm32"))'.dependencies]
+cpal = { workspace = true }
+rodio = { workspace = true }
+
+[target.'cfg(target_arch = "wasm32")'.dependencies]
+gloo = { workspace = true, features = ["futures", "timers"] }
+wasm-bindgen-futures = { workspace = true }
+dioxus = { workspace = true }
+web-sys = { workspace = true, features = [
+    "AudioContext",
+    "AudioDestinationNode",
+    "AudioParam",
+    "Clipboard",
+    "GainNode",
+    "Navigator",
+    "OscillatorNode",
+    "OscillatorType",
+    "SpeechSynthesis",
+    "SpeechSynthesisUtterance",
+    "Window",
+] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2 = { workspace = true }
+objc2-foundation = { workspace = true }
+objc2-app-kit = { workspace = true, features = [
+    "NSPasteboard",
+    "NSSpeechSynthesizer",
+] }

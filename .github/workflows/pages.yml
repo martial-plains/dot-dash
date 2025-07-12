@@ -41,6 +41,7 @@ jobs:
     # build css and rust
     - name: build css
       run: |
+        cd web
         deno run -A dev.ts
         deno run build_css && dx build --release --platform web
     - name: Upload the build output

@@ -1,4 +1,6 @@
 use dioxus::prelude::*;
+#[cfg(target_arch = "wasm32")]
+use dot_dash::web::{copy_to_clipboard, play_morse, play_text};
 use morsify::{MorseCode, Options as MorseOptions};
 
 #[component]
@@ -79,12 +81,6 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                             is_playing.set(true);
                             #[cfg(target_arch = "wasm32")]
                             {
-                                use crate::platforms::web::play_text;
-                                play_text(text().as_str(), move || { is_playing.set(false) });
-                            }
-                            #[cfg(target_os = "macos")]
-                            {
-                                use crate::platforms::macos::play_text;
                                 play_text(text().as_str(), move || { is_playing.set(false) });
                             }
                         },
@@ -116,12 +112,6 @@ fn TextFormControl(text: Signal<String>, ontextinput: EventHandler<Event<FormDat
                         onclick: move |_| {
                             #[cfg(target_arch = "wasm32")]
                             {
-                                use crate::platforms::web::copy_to_clipboard;
-                                copy_to_clipboard(text().as_str());
-                            }
-                            #[cfg(target_os = "macos")]
-                            {
-                                use crate::platforms::macos::copy_to_clipboard;
                                 copy_to_clipboard(text().as_str());
                             }
                         },
@@ -164,22 +154,9 @@ fn MorseFormControl(
                             class: "cursor-pointer",
                             id: "play-output",
                             onclick: move |_| {
+                                is_playing.set(true);
                                 #[cfg(target_arch = "wasm32")]
                                 {
-                                    use crate::platforms::web::play_morse;
-                                    is_playing.set(true);
-                                    play_morse(
-                                        &morse(),
-                                        morse_opts(),
-                                        700.0,
-                                        60,
-                                        move || { is_playing.set(false) },
-                                    );
-                                }
-                                #[cfg(not(target_arch = "wasm32"))]
-                                {
-                                    use crate::platforms::desktop::play_morse;
-                                    is_playing.set(true);
                                     play_morse(
                                         &morse(),
                                         morse_opts(),
@@ -221,12 +198,6 @@ fn MorseFormControl(
                         onclick: move |_| {
                             #[cfg(target_arch = "wasm32")]
                             {
-                                use crate::platforms::web::copy_to_clipboard;
-                                copy_to_clipboard(morse().as_str());
-                            }
-                            #[cfg(target_os = "macos")]
-                            {
-                                use crate::platforms::macos::copy_to_clipboard;
                                 copy_to_clipboard(morse().as_str());
                             }
                         },
