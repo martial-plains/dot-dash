@@ -12,7 +12,7 @@ dioxus = { version = "0.6.2" }
 dioxus-cli-config = "0.6.2"
 dioxus-logger = "0.6.2"
 dot-dash = { path = "lib" }
-gtk4 = "0.9.7"
+gtk4 = "0.10.0"
 gloo = "0.11.0"
 morsify = "0.1.0"
 objc2 = "0.6.1"
