@@ -8,7 +8,7 @@ rust-version = "1.88"
 [workspace.dependencies]
 cpal = "0.16.0"
 derive_more = { version = "2.0.1" }
-dioxus = { version = "0.6.2" }
+dioxus = { version = "0.7.0" }
 dioxus-cli-config = "0.7.0"
 dioxus-logger = "0.7.0"
 dot-dash = { path = "lib" }
