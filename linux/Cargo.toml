@@ -1,9 +1,0 @@
-[package]
-name = "dot_dash-linux"
-version = "0.1.0"
-edition = "2024"
-rust-version.workspace = true
-
-[dependencies]
-gtk4 = { workspace = true }
-dot-dash = { workspace = true }
