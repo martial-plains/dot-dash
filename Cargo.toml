@@ -1,28 +1,9 @@
 [workspace]
 resolver = "3"
-members = ["web", "lib", "linux"]
-
-[workspace.package]
-rust-version = "1.88"
+members = ["lib"]
 
 [workspace.dependencies]
-cpal = "0.16.0"
-derive_more = { version = "2.0.1" }
-dioxus = { version = "0.7.0" }
-dioxus-cli-config = "0.7.0"
-dioxus-logger = "0.7.0"
-dot-dash = { path = "lib" }
-gtk4 = "0.10.0"
-gloo = "0.11.0"
-morsify = "0.1.0"
-objc2 = "0.6.1"
-objc2-app-kit = "0.3.1"
-objc2-foundation = "0.3.1"
-rodio = "0.21.0"
-serde = "1.0.211"
-tokio = "1.46.1"
-wasm-bindgen-futures = "0.4.43"
-web-sys = "0.3.69"
+
 
 [profile]
 

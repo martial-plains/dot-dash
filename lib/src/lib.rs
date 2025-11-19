@@ -1,6 +1,8 @@
-#[cfg(not(target_arch = "wasm32"))]
-pub mod desktop;
-#[cfg(target_os = "macos")]
-pub mod macos;
-#[cfg(target_arch = "wasm32")]
-pub mod web;
+#![feature(decl_macro)]
+
+uniffi::setup_scaffolding!();
+
+pub mod learning;
+pub mod morse;
+pub mod stats;
+pub mod utils;
